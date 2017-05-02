@@ -4,37 +4,27 @@ import { Task } from './task.model';
 @Component({
   selector: 'edit-task',
   template: `
-  <div>
-    <div *ngIf="childSelectedTask">
-      <h3>{{childSelectedTask.description}}</h3>
-      <p>Task Complete? {{childSelectedTask.done}}</p>
-      <hr>
-      <h3>Edit Task</h3>
-      <label>Enter Task Description:</label>
-      <input class="form-control" [(ngModel)]="childSelectedTask.description">
+  <md-card *ngIf="childSelectedTask">
+    <md-card-header>
+      <md-card-title>{{childSelectedTask.description}}</md-card-title>
+      <md-card-subtitle>Task Complete? {{childSelectedTask.done}}</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <md-input-container style="width: 100%;">
+        <input mdInput placeholder="Task Description" [(ngModel)]="childSelectedTask.description">
+      </md-input-container>
       <label>Enter Task Priority (1-3):</label>
       <br>
-      <div class="radio">
-        <label>
-          <input type="radio" [(ngModel)]="childSelectedTask.priority" [value]="1">1 (Low Priority)
-        </label>
-      </div>
-      <br>
-      <div class="radio">
-        <label>
-          <input type="radio" [(ngModel)]="childSelectedTask.priority" [value]="2">2 (Medium Priority)
-        </label>
-      </div>
-      <br>
-      <div class="radio">
-        <label>
-          <input type="radio" [(ngModel)]="childSelectedTask.priority" [value]="3">3 (High Priority)
-        </label>
-      </div>
+      <md-radio-group class="radio-group" [(ngModel)]="childSelectedTask.priority">
+        <md-radio-button class="radio-button" [value]="1">1 (Low Priority)</md-radio-button>
+        <md-radio-button class="radio-button" [value]="2">2 (Medium Priority)</md-radio-button>
+        <md-radio-button class="radio-button" [value]="3">3 (High Priority)</md-radio-button>
+      </md-radio-group>
       <br>
       <button class="btn btn-default" (click)="finishedEditing()">Done</button>
-    </div>
-  </div>
+    </md-card-content>
+  </md-card>
+  <hr>
   `
 })
 
